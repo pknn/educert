@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "database": "educert",
+            "dialect": "PostgreSQL",
+            "name": "educert",
+            "port": 5432,
+            "server": "localhost",
+            "username": "educert"
+        }
+    ]
+}
