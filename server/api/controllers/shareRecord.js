@@ -7,13 +7,13 @@ const post = async (request, response) => {
 }
 
 const deleteSharedRecord = async (request, response) => {
-    const { id } = request.body
+    const { id } = request.params
     await service.deleteSharedRecord(id)
     response.sendStatus(200)
 }
 
 const get = async (request, response) => {
-    const { id } = request.body
+    const { id } = request.params
     const shareRecord = await service.getShareRecordFromID(id)
     response.json(shareRecord)
 }

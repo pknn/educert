@@ -13,13 +13,13 @@ const put = async (request, response) => {
 }
 
 const deleteRecord = async (request, response) => {
-    const { id } = request.body
+    const { id } = request.params
     await service.deleteRecord(id)
     response.sendStatus(200)
 }
 
 const get = async (request, response) => {
-    const { id } = request.body
+    const { id } = request.params
     const record = await service.getRecordFromID(id)
     response.json(record)
 }

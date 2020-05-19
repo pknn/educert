@@ -8,7 +8,7 @@ const post = async (request, response) => {
 
 
 const get = async (request, response) => {
-    const { id } = request.body
+    const { id } = request.params
     const transaction = await service.getTransactionFromID(id)
     response.json(transaction)
 }
