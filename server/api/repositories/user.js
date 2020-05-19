@@ -8,11 +8,21 @@ const createUser = async (user) => {
   } catch (error) {}
 }
 
-const getUser = (id) => {
-  return sql`SELECT firstname, lastname, email, role from USERS`
+const getUserFromID = (id) => {
+  return sql`SELECT firstname, lastname, email, role FROM USERS WHERE id=${id}`
+}
+
+const getUserFromRole = (role) => {
+  return sql`SELECT id, firstname, lastname, email, role FROM USERS WHERE role=${role}`
+}
+
+const deleteUser = (id) => {
+  return sql`DELETE FROM USERS WHERE id=${id}`
 }
 
 module.exports = {
   createUser,
-  getUser
+  getUserFromID,
+  getUserFromRole,
+  deleteUser
 }
