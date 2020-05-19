@@ -14,7 +14,10 @@ const router = Router()
 
 router.route('/version').get(version.get)
 
-router.route('/users').post(createUserMiddleware, user.post)
+router
+  .route('/users')
+  .post(createUserMiddleware, user.post)
+  .get(user.getSelf)
 router.get('/users/:id', restrictedAccessMiddleware, user.getFromID)
 router.delete('/users/:id', user.delete)
 

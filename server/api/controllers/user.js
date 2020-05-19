@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const service = require('../services/user')
 const post = async (request, response) => {
   const { firstName, lastName, email, password, role } = request.body
@@ -6,6 +7,20 @@ const post = async (request, response) => {
     response.sendStatus(201)
   } catch (error) {
     response.sendStatus(400)
+  }
+}
+
+const getSelf = async (request, response) => {
+  let { authorization: token } = request.headers
+  token = token.split(' ')
+  if (token.shift() !== 'Bearer') response.sendStatus(401)
+  token = token.shift()
+  try {
+    const payload = jwt.verify(token, process.env.APP_SECRET)
+    const result = await service.getUserFromID(payload.id)
+    response.json(result)
+  } catch (error) {
+    response.sendStatus(401)
   }
 }
 
@@ -31,5 +46,6 @@ const deleteUser = async (request, response) => {
 module.exports = {
   post,
   delete: deleteUser,
-  getFromID
+  getFromID,
+  getSelf
 }
