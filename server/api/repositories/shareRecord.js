@@ -14,13 +14,14 @@ const deleteSharedRecord = async (id) => {
     }catch(error){}
 }
 
-const getSharedRecord = (id) => {
-  return sql`SELECT holder, gpax, created_at, updated_at FROM GRANTED_SHARE_RECORDS`
+const getShareRecordFromID = (id) => {
+  return sql`SELECT record, viewer, created_at FROM GRANTED_SHARE_RECORDS WHERE id =${id}`
 }
+
 
 
 module.exports = {
   createShareRecord,
   deleteSharedRecord,
-  getSharedRecord,
+  getShareRecordFromID,
 }

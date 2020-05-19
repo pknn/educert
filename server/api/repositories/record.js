@@ -23,8 +23,8 @@ const deleteRecord = async (id) => {
     }catch(error){}
 }
 
-const getRecord = (id) => {
-  return sql`SELECT holder, gpax, created_at, updated_at FROM RECORDS`
+const getRecordFromID = (id) => {
+  return sql`SELECT holder, gpax, created_at, updated_at FROM RECORDS WHERE id = ${id}`
 }
 
 
@@ -32,5 +32,5 @@ module.exports = {
   createRecord,
   updateRecord,
   deleteRecord,
-  getRecord,
+  getRecordFromID,
 }
