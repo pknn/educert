@@ -11,7 +11,7 @@ const createUser = async (user) => {
 }
 
 const getUserFromID = async (id) => {
-  const result = await sql`SELECT firstname, lastname, email, role FROM USERS WHERE id=${id}`
+  const result = await sql`SELECT id, firstname, lastname, email, role FROM USERS WHERE id=${id}`
   return result[0]
 }
 

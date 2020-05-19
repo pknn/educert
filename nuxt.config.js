@@ -16,6 +16,9 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  router: {
+    middleware: ['auth']
+  },
   /*
    ** Customize the progress-bar color
    */
@@ -46,7 +49,8 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
   /*
    ** Axios module configuration
@@ -61,5 +65,22 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/users', method: 'get', propertyName: 'user' }
+        },
+        autoFetchUser: false,
+        globalToken: true
+      }
+    }
   }
 }

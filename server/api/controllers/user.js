@@ -9,20 +9,17 @@ const post = async (request, response) => {
   }
 }
 
-const getStudents = async (request, response) => {
-  const users = await service.getUserFromRole('student')
-  response.json(users)
-}
-
-const getOfficers = async (request, response) => {
-  const users = await service.getUserFromRole('officer')
-  response.json(users)
-}
-
 const getFromID = async (request, response) => {
   const { id } = request.params
-  const user = await service.getUserFromID(id)
-  response.json(user)
+  let result
+  if (id === 'students') {
+    result = await service.getUserFromRole('student')
+  } else if (id === 'officers') {
+    result = await service.getUserFromRole('officer')
+  } else {
+    result = await service.getUserFromID(id)
+  }
+  response.json(result)
 }
 
 const deleteUser = async (request, response) => {
@@ -34,7 +31,5 @@ const deleteUser = async (request, response) => {
 module.exports = {
   post,
   delete: deleteUser,
-  getStudents,
-  getOfficers,
   getFromID
 }
