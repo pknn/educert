@@ -13,6 +13,21 @@ const createUser = async (firstName, lastName, email, password, role) => {
   })
 }
 
+const getUserFromRole = (role) => {
+  return repository.getUserFromRole(role)
+}
+
+const getUserFromID = (id) => {
+  return repository.getUserFromID(id)
+}
+
+const deleteUser = (id) => {
+  return repository.deleteUser(id)
+}
+
 module.exports = {
-  createUser
+  createUser,
+  deleteUser,
+  getUserFromRole,
+  getUserFromID
 }

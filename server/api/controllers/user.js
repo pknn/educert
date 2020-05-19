@@ -5,6 +5,32 @@ const post = async (request, response) => {
   response.sendStatus(201)
 }
 
+const getStudents = async (request, response) => {
+  const users = await service.getUserFromRole('student')
+  response.json(users)
+}
+
+const getOfficers = async (request, response) => {
+  const users = await service.getUserFromRole('officer')
+  response.json(users)
+}
+
+const getFromID = async (request, response) => {
+  const { id } = request.params
+  const user = await service.getUserFromID(id)
+  response.json(user)
+}
+
+const deleteUser = async (request, response) => {
+  const { id } = request.params
+  await service.deleteUser(id)
+  response.sendStatus(200)
+}
+
 module.exports = {
-  post
+  post,
+  delete: deleteUser,
+  getStudents,
+  getOfficers,
+  getFromID
 }
