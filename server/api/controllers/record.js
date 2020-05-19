@@ -2,7 +2,7 @@ const service = require('../services/record')
 
 const post = async (request, response) => {
   const { holder, gpax } = request.body
-  await service.createUser(holder, gpax)
+  await service.createRecord(holder, gpax)
   response.sendStatus(201)
 }
 
