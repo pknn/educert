@@ -1,4 +1,5 @@
 const repository = require('../repositories/record')
+const transaction = require('./transaction')
 
 const createRecord = (holder, gpax) => {
   return repository.createRecord({

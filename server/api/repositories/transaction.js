@@ -8,8 +8,9 @@ const createTransaction = async (shareRecord) => {
   } catch (error) {}
 }
 
-const getTransactionFromID = (id) => {
-  return sql`SELECT record, issuer, created_at, issued_data FROM TRANSACTIONS WHERE id =${id}`
+const getTransactionFromID = async (id) => {
+  const result = await  sql`SELECT record, issuer, created_at, issued_data FROM TRANSACTIONS WHERE id =${id}`
+  return result[0]
 }
 
 module.exports = {

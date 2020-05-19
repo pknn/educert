@@ -10,7 +10,7 @@ const createRecord = async (record) => {
 
 const updateRecord = async (record) => {
   try {
-    await sql`UPDATE RECORDS SET holder = ${record.holder}, gpax = ${record.gpax}, updated_at = CURRENT_TIMESTAMP 
+    await sql`UPDATE RECORDS SET gpax = ${record.gpax}, updated_at = CURRENT_TIMESTAMP 
         WHERE id = ${record.id}
         `
   } catch (error) {}
@@ -22,8 +22,9 @@ const deleteRecord = async (id) => {
   } catch (error) {}
 }
 
-const getRecordFromID = (id) => {
-  return sql`SELECT holder, gpax, created_at, updated_at FROM RECORDS WHERE id = ${id}`
+const getRecordFromID = async (id) => {
+  const result = await sql`SELECT holder, gpax, created_at, updated_at FROM RECORDS WHERE id = ${id}`
+  return result[0]
 }
 
 module.exports = {
