@@ -23,6 +23,7 @@ router.delete('/users/:id', user.delete)
 
 router.post('/auth/login', auth.login)
 router.post('/auth/logout', auth.logout)
+
 router.post('/record', officerAccessMiddleware, record.post)
 router.put('/record', officerAccessMiddleware, record.put)
 router.get('/record/:id', restrictedAccessMiddleware, record.get)

@@ -2,23 +2,25 @@ const sql = require('../../db')
 
 const createRecord = async (record) => {
   try {
-    await sql`
-    INSERT INTO RECORDS ${sql(record)}
+    const [id] = await sql`
+    INSERT INTO RECORDS ${sql(record)} RETURNING id
   `
+  return id;
   } catch (error) {}
 }
 
 const updateRecord = async (record) => {
   try {
-    await sql`UPDATE RECORDS SET gpax = ${record.gpax}, updated_at = CURRENT_TIMESTAMP 
-        WHERE id = ${record.id}
+    const [id] = await sql`UPDATE RECORDS SET gpax = ${record.gpax}, updated_at = CURRENT_TIMESTAMP WHERE id = ${record.id} RETURNING id
         `
+    return id
   } catch (error) {}
 }
 
 const deleteRecord = async (id) => {
   try {
-    await sql`DELETE FROM RECORDS WHERE id = ${id}`
+    const [id] = await sql`DELETE FROM RECORDS WHERE id = ${id} RETURNING id`
+    return id
   } catch (error) {}
 }
 

@@ -2,20 +2,58 @@ const service = require('../services/record')
 
 const post = async (request, response) => {
   const { holder, gpax } = request.body
-  await service.createRecord(holder, gpax)
-  response.sendStatus(201)
+
+  let { authorization: token } = request.headers
+  token = token.split(' ')
+  if (token.shift() !== 'Bearer') response.sendStatus(401)
+  token = token.shift()
+  try {
+    const payload = jwt.verify(token, process.env.APP_SECRET)
+    const issuerId = await repository.getUserFromID(payload.id)
+    
+    await service.createRecord(holder, gpax, issuerId)
+    response.sendStatus(201)
+  } catch (error) {
+    response.sendStatus(403)
+  }
+
 }
 
 const put = async (request, response) => {
   const { id, holder, gpax } = request.body
-  await service.updateRecord(id, holder, gpax)
-  response.sendStatus(200)
+
+  let { authorization: token } = request.headers
+  token = token.split(' ')
+  if (token.shift() !== 'Bearer') response.sendStatus(401)
+  token = token.shift()
+  try {
+    const payload = jwt.verify(token, process.env.APP_SECRET)
+    const issuerId = await repository.getUserFromID(payload.id)
+    
+    await service.updateRecord(id, holder, gpax, issuerId)
+    response.sendStatus(200)
+  } catch (error) {
+    response.sendStatus(403)
+  }
+
 }
 
 const deleteRecord = async (request, response) => {
   const { id } = request.params
-  await service.deleteRecord(id)
-  response.sendStatus(200)
+
+  let { authorization: token } = request.headers
+  token = token.split(' ')
+  if (token.shift() !== 'Bearer') response.sendStatus(401)
+  token = token.shift()
+  try {
+    const payload = jwt.verify(token, process.env.APP_SECRET)
+    const issuerId = await repository.getUserFromID(payload.id)
+    
+    await service.deleteRecord(id, issuerId)
+    response.sendStatus(200)
+  } catch (error) {
+    response.sendStatus(403)
+  }
 }
 
 const get = async (request, response) => {
