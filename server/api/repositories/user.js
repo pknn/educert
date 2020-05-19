@@ -5,15 +5,23 @@ const createUser = async (user) => {
     await sql`
     INSERT INTO USERS ${sql(user)}
   `
-  } catch (error) {}
+  } catch (error) {
+    throw new Error('Already have user with this email')
+  }
 }
 
-const getUserFromID = (id) => {
-  return sql`SELECT firstname, lastname, email, role FROM USERS WHERE id=${id}`
+const getUserFromID = async (id) => {
+  const result = await sql`SELECT firstname, lastname, email, role FROM USERS WHERE id=${id}`
+  return result[0]
 }
 
 const getUserFromRole = (role) => {
   return sql`SELECT id, firstname, lastname, email, role FROM USERS WHERE role=${role}`
+}
+
+const getUserFromEmail = async (email) => {
+  const result = await sql`SELECT id, firstname, lastname, email, hashedpassword, role FROM USERS WHERE email=${email}`
+  return result[0]
 }
 
 const deleteUser = (id) => {
@@ -24,5 +32,6 @@ module.exports = {
   createUser,
   getUserFromID,
   getUserFromRole,
+  getUserFromEmail,
   deleteUser
 }
