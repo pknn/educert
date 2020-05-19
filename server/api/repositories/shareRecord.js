@@ -14,8 +14,9 @@ const deleteSharedRecord = async (id) => {
   } catch (error) {}
 }
 
-const getShareRecordFromID = (id) => {
-  return sql`SELECT record, viewer, created_at FROM GRANTED_SHARE_RECORDS WHERE id =${id}`
+const getShareRecordFromID = async (id) => {
+  const result = await sql`SELECT record, viewer, created_at FROM GRANTED_SHARE_RECORDS WHERE id =${id}`
+  return result[0]
 }
 
 module.exports = {

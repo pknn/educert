@@ -1,9 +1,9 @@
 const repository = require('../repositories/shareRecord')
 
-const createShareRecord = (recordId, userId) => {
+const createShareRecord = (recordId, viewerId) => {
   return repository.createShareRecord({
     record: recordId,
-    viewer: userId
+    viewer: viewerId
   })
 }
 

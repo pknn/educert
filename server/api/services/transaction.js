@@ -1,9 +1,9 @@
 const repository = require('../repositories/transaction')
 
-const createTransaction = (recordId, userId) => {
+const createTransaction = (recordId, issuerId) => {
   return repository.createTransaction({
     record: recordId,
-    issuer: userId
+    issuer: issuerId
   })
 }
 

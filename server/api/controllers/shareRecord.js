@@ -1,8 +1,8 @@
 const service = require('../services/shareRecord')
 
 const post = async (request, response) => {
-  const { recordId, userId } = request.body
-  await service.createShareRecord(recordId, userId)
+  const { recordId, viewerId } = request.body
+  await service.createShareRecord(recordId, viewerId)
   response.sendStatus(201)
 }
 
