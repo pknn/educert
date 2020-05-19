@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
   /*
    ** Headers of the page
    */
@@ -76,9 +76,8 @@ module.exports = {
             propertyName: 'token'
           },
           logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/users', method: 'get', propertyName: 'user' }
+          user: { url: '/api/users', method: 'get', propertyName: false }
         },
-        autoFetchUser: false,
         globalToken: true
       }
     }
