@@ -36,7 +36,7 @@ export default {
     async login() {
       const [account] = await window.ethereum.enable()
       const user = await this.$axios.$get(`/users/${account}`)
-      if (!user) this.$router.push('/register')
+      if (!user) this.$router.push(`/register?addr=${account}`)
     }
   }
 }

@@ -80,8 +80,26 @@ export default {
       }, 2000)
       return this.valid.length === 0
     },
-    register() {
-      this.checkInput()
+    async register() {
+      if (this.checkInput()) {
+        const { firstName, lastName, verification, role } = this
+        const { addr: publicAddress } = this.$route.query
+        try {
+          await this.$axios.$post('/users', {
+            firstName,
+            lastName,
+            verification,
+            role,
+            publicAddress
+          })
+        } catch (error) {
+          this.valid.push('Verification Code is not valid.')
+          this.verification = ''
+          setTimeout(() => {
+            this.valid = []
+          }, 2000)
+        }
+      }
     }
   }
 }

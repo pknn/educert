@@ -7,8 +7,7 @@ create table if not exists users (
   created_at timestamptz not null default now()
 );
 create table if not exists pending_users (
-  id varchar(10) primary key,
+  id uuid primary key default uuid_generate_v4(),
   verification_code varchar(50) not null,
-  public_address varchar(50) not null,
-  role user_type not null
+  public_address varchar(50) not null
 );
