@@ -1,10 +1,19 @@
 const service = require('../services/users')
 
 module.exports = {
-  getByAddress: async (request, response) => {
-    const { publicAddress } = request.params
+  getSelf: async (request, response) => {
+    const publicAddress = request.publicAddress
     const result = await service.getUserByAddress(publicAddress)
     response.json(result)
+  },
+  getAddressExists: async (request, response) => {
+    const { publicAddress } = request.params
+    const result = await service.getUserByAddress(publicAddress)
+    if (result) {
+      response.send(true)
+    } else {
+      response.send(false)
+    }
   },
   register: async (request, response) => {
     const {

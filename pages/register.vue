@@ -92,6 +92,9 @@ export default {
             role,
             publicAddress
           })
+          await this.$auth.loginWith('local', {
+            data: { publicAddress }
+          })
         } catch (error) {
           this.valid.push('Verification Code is not valid.')
           this.verification = ''

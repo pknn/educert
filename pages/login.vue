@@ -35,8 +35,13 @@ export default {
   methods: {
     async login() {
       const [account] = await window.ethereum.enable()
-      const user = await this.$axios.$get(`/users/${account}`)
+      const user = await this.$axios.$get(`/users/exists/${account}`)
       if (!user) this.$router.push(`/register?addr=${account}`)
+      else {
+        await this.$auth.loginWith('local', {
+          data: { publicAddress: account }
+        })
+      }
     }
   }
 }
