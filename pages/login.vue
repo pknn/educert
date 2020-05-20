@@ -10,7 +10,10 @@
           <input v-model="password" placeholder="Password" type="password" />
         </div>
         <div>
-          <button class="rounded my-1 p-2 w-full bg-blue-400" type="submit">
+          <button
+            class="rounded my-1 p-2 w-full bg-blue-400 hover:bg-blue-300"
+            type="submit"
+          >
             Login
           </button>
         </div>
@@ -50,7 +53,9 @@ export default {
           data: { email: this.email, password: this.password }
         })
       } catch (error) {
-        console.error(error)
+        alert('Email or Password is not correct.')
+        this.email = ''
+        this.password = ''
       }
     }
   }
