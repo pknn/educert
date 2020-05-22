@@ -15,6 +15,9 @@ module.exports = {
   getUserByAddress: (publicAddress) => {
     return repository.getUserByAddress(publicAddress.toLowerCase())
   },
+  getUsersByRole: (role) => {
+    return repository.getUsersByRole(role)
+  },
   invite: (publicAddress, entityId) => {
     const verification = createVerificationCode()
     return repository.addPending(
@@ -51,5 +54,8 @@ module.exports = {
         throw new Error('Incorrect Verification Code')
       }
     }
+  },
+  delete: (publicAddress) => {
+    return repository.deleteUser(publicAddress)
   }
 }

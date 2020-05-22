@@ -18,13 +18,22 @@
       </button>
     </div>
     <div>
-      <h1>Student List</h1>
+      <student-list :students="students" @deleteStudent="onDeleteStudent" />
     </div>
   </div>
 </template>
 
 <script>
+import StudentList from '@/components/StudentList'
 export default {
+  name: 'UsersStudents',
+  components: {
+    StudentList
+  },
+  async asyncData({ $axios }) {
+    const students = await $axios.$get('/users?role=student')
+    return { students }
+  },
   data: () => ({
     publicAddress: '',
     studentId: ''
@@ -37,6 +46,12 @@ export default {
       })
       this.publicAddress = ''
       this.studentId = ''
+    },
+    async onDeleteStudent(publicAddress) {
+      await this.$axios.$delete(`/users/${publicAddress}`)
+      this.students = this.students.filter(
+        (student) => student.public_address !== publicAddress
+      )
     }
   }
 }

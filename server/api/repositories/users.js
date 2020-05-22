@@ -8,6 +8,13 @@ module.exports = {
     `
     return user
   },
+  getUsersByRole: async (role) => {
+    const users = await sql`
+      select * from users
+      where role=${role}
+    `
+    return users
+  },
   getPendingFromAddress: async (publicAddress) => {
     const [code] = await sql`
       select entity_id, verification_code from pending_users
@@ -47,6 +54,12 @@ module.exports = {
     }
     return await sql`
       insert into users ${sql(body)}
+    `
+  },
+  deleteUser: async (publicAddress) => {
+    return await sql`
+      delete from users
+      where public_address=${publicAddress}
     `
   }
 }

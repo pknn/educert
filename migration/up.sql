@@ -3,7 +3,7 @@ create table if not exists users (
   public_address varchar(50) primary key,
   firstname varchar(50) not null,
   lastname varchar(50) not null,
-  role user_type not null unique,
+  role user_type not null,
   entity_id varchar(20),
   created_at timestamptz not null default now()
 );

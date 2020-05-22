@@ -15,6 +15,11 @@ module.exports = {
       response.send(false)
     }
   },
+  getUsers: async (request, response) => {
+    const { role } = request.query
+    const users = await service.getUsersByRole(role)
+    response.json(users)
+  },
   register: async (request, response) => {
     const {
       publicAddress,
@@ -41,6 +46,15 @@ module.exports = {
     try {
       await service.invite(publicAddress, entityId)
       response.sendStatus(201)
+    } catch (error) {
+      response.sendStatus(500)
+    }
+  },
+  deleteUser: async (request, response) => {
+    const { publicAddress } = request.params
+    try {
+      await service.delete(publicAddress)
+      response.sendStatus(200)
     } catch (error) {
       response.sendStatus(500)
     }
