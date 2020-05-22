@@ -2,15 +2,15 @@ const service = require('../services/auth')
 
 module.exports = {
   login: async (request, response) => {
-    const { email, password } = request.body
+    const { publicAddress } = request.body
     try {
-      const userToken = await service.login(email, password)
-      response.json(userToken)
+      const token = await service.login(publicAddress)
+      response.json({ token })
     } catch (error) {
       response.sendStatus(401)
     }
   },
-  logout: (request, response) => {
-    response.send()
+  logout: (_, response) => {
+    response.sendStatus(200)
   }
 }

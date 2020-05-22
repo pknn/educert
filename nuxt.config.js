@@ -56,7 +56,9 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: '/api'
+  },
   /*
    ** Build configuration
    */
@@ -71,14 +73,19 @@ module.exports = {
       local: {
         endpoints: {
           login: {
-            url: '/api/auth/login',
+            url: '/auth/login',
             method: 'post',
             propertyName: 'token'
           },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/users', method: 'get', propertyName: false }
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/users/me', method: 'get', propertyName: false }
         },
         globalToken: true
+      },
+      redirect: {
+        login: '/login',
+        logout: '/login',
+        home: '/'
       }
     }
   }
