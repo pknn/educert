@@ -1,8 +1,37 @@
 <template>
-  <div>
+  <div class="flex">
+    <div class="w-1/5 bg-blue-200 h-screen fixed p-2 flex">
+      <ul class="mx-6">
+        <li class="text-2xl py-4">
+          User
+          <ul class="ml-4 py-2">
+            <li class="text-lg py-2">
+              <nuxt-link :to="{ path: '/users/students' }">Students</nuxt-link>
+            </li>
+            <li class="text-lg py-2">
+              <nuxt-link :to="{ path: '/users/officers' }">Officers</nuxt-link>
+            </li>
+          </ul>
+        </li>
+        <li class="text-2xl py-4">
+          <nuxt-link :to="{ path: '/records' }">Records</nuxt-link>
+        </li>
+      </ul>
+    </div>
     <nuxt />
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
@@ -16,40 +45,10 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
 }
 </style>

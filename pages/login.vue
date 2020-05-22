@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  layout: 'withoutNav',
   data() {
     return {
       isUserExists: true

@@ -60,6 +60,7 @@ input[type='text'] {
 
 <script>
 export default {
+  layout: 'withoutNav',
   auth: false,
   data: () => ({
     role: 'employer',
