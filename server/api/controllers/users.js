@@ -33,13 +33,14 @@ module.exports = {
       )
       response.sendStatus(201)
     } catch (error) {
+      console.log(error)
       response.status(400).send(error.message)
     }
   },
   invite: async (request, response) => {
-    const { publicAddress } = request.body
+    const { publicAddress, entityId } = request.body
     try {
-      await service.invite(publicAddress)
+      await service.invite(publicAddress, entityId)
       response.sendStatus(201)
     } catch (error) {
       response.sendStatus(500)

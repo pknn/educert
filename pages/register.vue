@@ -96,6 +96,7 @@ export default {
           await this.$auth.loginWith('local', {
             data: { publicAddress }
           })
+          this.$router.push('/')
         } catch (error) {
           this.valid.push('Verification Code is not valid.')
           this.verification = ''

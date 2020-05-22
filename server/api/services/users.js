@@ -13,28 +13,40 @@ const createVerificationCode = () => {
 
 module.exports = {
   getUserByAddress: (publicAddress) => {
-    return repository.getUserByAddress(publicAddress)
+    return repository.getUserByAddress(publicAddress.toLowerCase())
   },
-  invite: (publicAddress) => {
+  invite: (publicAddress, entityId) => {
     const verification = createVerificationCode()
-    return repository.addPending(verification, publicAddress)
+    return repository.addPending(
+      verification,
+      publicAddress.toLowerCase(),
+      entityId
+    )
   },
   register: async (publicAddress, firstName, lastName, role, verification) => {
     if (role === 'employer') {
       const user = await repository.createUser(
         firstName,
         lastName,
-        publicAddress,
+        publicAddress.toLowerCase(),
         role
       )
       return user
     } else {
-      const pending = await repository.getPendingFromAddress(publicAddress)
+      const pending = await repository.getPendingFromAddress(
+        publicAddress.toLowerCase()
+      )
       if (!pending) throw new Error('Not found in Pending')
-      const { verification_code: code, id } = pending
+      const { verification_code: code, entity_id: entityId } = pending
       if (code === verification) {
-        await repository.createUser(firstName, lastName, publicAddress, role)
-        await repository.removePending(id)
+        await repository.createUser(
+          firstName,
+          lastName,
+          publicAddress.toLowerCase(),
+          role,
+          entityId
+        )
+        await repository.removePending(publicAddress.toLowerCase())
       } else {
         throw new Error('Incorrect Verification Code')
       }

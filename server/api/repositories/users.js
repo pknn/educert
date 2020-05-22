@@ -10,32 +10,40 @@ module.exports = {
   },
   getPendingFromAddress: async (publicAddress) => {
     const [code] = await sql`
-      select id, verification_code from pending_users
+      select entity_id, verification_code from pending_users
       where public_address=${publicAddress}
     `
     return code
   },
-  addPending: (verificationCode, publicAddress) => {
+  addPending: (verificationCode, publicAddress, entityId) => {
     const body = {
       verification_code: verificationCode,
-      public_address: publicAddress
+      public_address: publicAddress,
+      entity_id: entityId
     }
     return sql`
       insert into pending_users ${sql(body)}
     `
   },
-  removePending: (id) => {
+  removePending: (publicAddress) => {
     return sql`
       delete from pending_users
-      where id=${id}
+      where public_address=${publicAddress}
     `
   },
-  createUser: async (firstName, lastName, publicAddress, role) => {
+  createUser: async (
+    firstName,
+    lastName,
+    publicAddress,
+    role,
+    entityId = ''
+  ) => {
     const body = {
       firstName,
       lastName,
       public_address: publicAddress,
-      role
+      role,
+      entity_id: entityId
     }
     return await sql`
       insert into users ${sql(body)}

@@ -13,6 +13,11 @@ export default {
     return {
       role: this.$auth.user.role
     }
+  },
+  mounted() {
+    if (this.role === 'officer') {
+      this.$router.push('/records')
+    }
   }
 }
 </script>
