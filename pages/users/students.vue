@@ -17,6 +17,9 @@
         Invite Student
       </button>
     </div>
+    <div>
+      <h1>Student List</h1>
+    </div>
   </div>
 </template>
 

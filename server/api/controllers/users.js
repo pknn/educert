@@ -33,7 +33,6 @@ module.exports = {
       )
       response.sendStatus(201)
     } catch (error) {
-      console.log(error)
       response.status(400).send(error.message)
     }
   },
