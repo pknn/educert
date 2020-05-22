@@ -18,17 +18,17 @@
       </button>
     </div>
     <div>
-      <student-list :students="students" @deleteStudent="onDeleteStudent" />
+      <user-list :users="students" @deleteUsers="onDeleteStudent" />
     </div>
   </div>
 </template>
 
 <script>
-import StudentList from '@/components/StudentList'
+import UserList from '@/components/UserList'
 export default {
   name: 'UsersStudents',
   components: {
-    StudentList
+    UserList
   },
   async asyncData({ $axios }) {
     const students = await $axios.$get('/users?role=student')
