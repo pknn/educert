@@ -18,6 +18,9 @@ module.exports = {
   getUsersByRole: (role) => {
     return repository.getUsersByRole(role)
   },
+  getUsersByEntity: (entityId) => {
+    return repository.getUsersByEntity(entityId)
+  },
   invite: (publicAddress, entityId) => {
     const verification = createVerificationCode()
     return repository.addPending(

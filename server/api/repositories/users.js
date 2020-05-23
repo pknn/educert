@@ -15,6 +15,13 @@ module.exports = {
     `
     return users
   },
+  getUsersByEntity: async (entityId) => {
+    const users = await sql`
+      select * from users
+      where entity_id like ${entityId + '%'}
+    `
+    return users
+  },
   getPendingFromAddress: async (publicAddress) => {
     const [code] = await sql`
       select entity_id, verification_code from pending_users

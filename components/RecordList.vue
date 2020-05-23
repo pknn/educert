@@ -1,0 +1,5 @@
+<template>
+  <div>
+    <h1>Record List</h1>
+  </div>
+</template>
