@@ -25,6 +25,9 @@ module.exports = {
     if (!payload.publicAddress) response.sendStatus(401)
     const user = await userRepository.getUserByAddress(payload.publicAddress)
     if (!user || !user.role === 'officer') response.sendStatus(401)
-    else next()
+    else {
+      request.publicAddress = payload.publicAddress
+      next()
+    }
   }
 }

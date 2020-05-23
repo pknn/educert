@@ -13,3 +13,9 @@ create table if not exists pending_users (
   verification_code varchar(50) not null,
   created_at timestamptz not null default now()
 );
+create table if not exists records (
+  holder varchar(50) primary key references users(public_address) not null,
+  gpax float not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);

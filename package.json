@@ -31,7 +31,9 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "nuxt": "^2.0.0",
-    "postgres": "^1.0.2"
+    "postgres": "^1.0.2",
+    "solc": "^0.6.8",
+    "web3": "^1.2.8"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",

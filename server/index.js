@@ -5,6 +5,7 @@ const app = express()
 require('dotenv').config()
 const config = require('../nuxt.config.js')
 const init = require('./srconf')
+const Transaction = require('./ethereum')
 
 // Import and Set Nuxt.js options
 config.dev = process.env.NODE_ENV !== 'production'
@@ -24,7 +25,7 @@ async function start() {
   init(app)
   // Give nuxt middleware to express
   app.use(nuxt.render)
-
+  await Transaction.deploy()
   // Listen the server
   app.listen(port, host)
   consola.ready({
@@ -33,3 +34,5 @@ async function start() {
   })
 }
 start()
+
+require('./ethereum')
