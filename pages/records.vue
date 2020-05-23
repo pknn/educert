@@ -17,7 +17,7 @@
       </button>
     </div>
     <div>
-      <record-list />
+      <record-list :records="records" @edit="refresh" />
       <div
         v-show="isCreateMode"
         class="w-full bg-white rounded shadow p-4 flex"
@@ -81,7 +81,7 @@ export default {
   name: 'Records',
   components: { RecordList },
   data: () => ({
-    isCreateMode: true,
+    isCreateMode: false,
     studentIdSearchTerm: '',
     studentResult: [],
     selectedStudent: '',
@@ -114,11 +114,15 @@ export default {
       }
       await this.$axios.$post('/records', body)
       const entity = await this.$axios.$get('/records')
-      this.records.push(entity[entity.length - 1])
+      this.records = entity
       this.studentIdSearchTerm = ''
       this.studentResult = []
       this.selectedStudent = ''
       this.gpax = ''
+    },
+    async refresh() {
+      const entity = await this.$axios.$get('/records')
+      this.records = entity
     }
   }
 }

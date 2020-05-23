@@ -33,7 +33,7 @@ module.exports = {
       update records
       set
       gpax=${gpax},
-      updated_at=CURRENT_TIMESTAMP,
+      updated_at=CURRENT_TIMESTAMP
       where holder=${id}
     `
   },

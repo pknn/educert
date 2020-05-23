@@ -48,5 +48,6 @@ module.exports = {
     const issuerID = request.publicAddress
     const { recordID } = request.params
     await service.delete(recordID, issuerID)
+    response.sendStatus(200)
   }
 }
