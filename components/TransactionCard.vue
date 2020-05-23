@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 my-1 bg-white rounded shadow flex items-end">
+  <div class="p-4 my-1 bg-white rounded shadow flex items-center">
     <div class="mx-2">
       <h1 class="text-gray-500">#{{ transaction.id }}</h1>
       <h1>{{ new Date(transaction.createdAt).toLocaleString() }}</h1>
