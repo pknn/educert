@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 bg-white rounded shadow flex w-1/2">
+  <div class="p-2 bg-white rounded shadow flex wdd mx-1 my-1">
     <h1 class="mr-2">#{{ share.id }}</h1>
     <div class="flex-1">
       <h1 class="text-sm text-gray-600">Employer ID</h1>
@@ -13,6 +13,12 @@
     </button>
   </div>
 </template>
+
+<style lang="postcss" scoped>
+.wdd {
+  width: 48%;
+}
+</style>
 
 <script>
 export default {

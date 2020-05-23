@@ -19,6 +19,10 @@ module.exports = {
   getByEmployerId: (employerId) => {
     return sql`
       select * from shared_records
+      join records on
+      shared_records.holder=records.holder
+      join users on
+      shared_records.holder=users.public_address
       where employer=${employerId}
     `
   },

@@ -1,6 +1,8 @@
 <template>
   <div class="px-32">
-    <div v-if="role === 'employer'"></div>
+    <div v-if="role === 'employer'">
+      <employer />
+    </div>
     <div v-else-if="role === 'student'">
       <student />
     </div>
@@ -9,10 +11,12 @@
 
 <script>
 import Student from '@/components/Student'
+import Employer from '@/components/Employer'
 export default {
   layout: 'withoutNav',
   components: {
-    Student
+    Student,
+    Employer
   },
   data() {
     return {

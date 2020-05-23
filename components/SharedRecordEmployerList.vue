@@ -4,13 +4,12 @@
       v-for="share in shares"
       :key="share.id"
       :share="share"
-      @delete="onDelete"
     />
   </div>
 </template>
 
 <script>
-import SharedRecordCard from '@/components/SharedRecordStudentCard'
+import SharedRecordCard from '@/components/SharedRecordEmployerCard'
 export default {
   components: {
     SharedRecordCard
@@ -21,10 +20,6 @@ export default {
       default: () => []
     }
   },
-  methods: {
-    onDelete() {
-      this.$emit('delete')
-    }
-  }
+  methods: {}
 }
 </script>

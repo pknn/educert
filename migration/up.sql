@@ -19,3 +19,8 @@ create table if not exists records (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+create table if not exists shared_records (
+  id serial primary key,
+  holder varchar(50) references users(public_address) not null,
+  employer varchar(50) references users(public_address) not null
+);
