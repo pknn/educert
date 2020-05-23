@@ -3,6 +3,7 @@ const version = require('./controllers/version')
 const user = require('./controllers/users')
 const auth = require('./controllers/auth')
 const record = require('./controllers/records')
+const shares = require('./controllers/shares')
 const middleware = require('./middlewares')
 
 const router = Router()
@@ -34,5 +35,9 @@ router.get(
 router.post('/records', middleware.officerAccess, record.create)
 router.put('/records/:recordID', middleware.officerAccess, record.edit)
 router.delete('/records/:recordID', middleware.officerAccess, record.delete)
+
+router.get('/shares', middleware.shareAccess, shares.get)
+router.post('/shares', middleware.selfAccess, shares.create)
+router.delete('/shares/:id', shares.delete)
 
 module.exports = router

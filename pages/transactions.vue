@@ -14,6 +14,7 @@ export default {
     transactions: []
   }),
   async mounted() {
+    if (this.$auth.user.role !== 'officer') this.$router.push('/')
     const txs = await this.$axios.$get('/transactions')
     const recordIds = Array.from(new Set(txs.map((tx) => tx.recordId)))
     const issuerIds = Array.from(new Set(txs.map((tx) => tx.issuerId)))

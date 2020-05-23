@@ -29,5 +29,22 @@ module.exports = {
       request.publicAddress = payload.publicAddress
       next()
     }
+  },
+  shareAccess: (request, response, next) => {
+    let { authorization: token } = request.headers
+    if (!token) response.sendStatus(400)
+    token = token.split(' ')
+    if (token.shift() !== 'Bearer') response.sendStatus(401)
+    const payload = jwt.verify(token.shift(), process.env.APP_SECRET)
+    if (!payload.publicAddress) response.sendStatus(401)
+    const { holderId, employerId } = request.query
+    if (
+      payload.publicAddress === holderId ||
+      payload.publicAddress === employerId
+    ) {
+      next()
+    } else {
+      response.sendStatus(401)
+    }
   }
 }

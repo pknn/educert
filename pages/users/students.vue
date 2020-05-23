@@ -38,6 +38,9 @@ export default {
     publicAddress: '',
     studentId: ''
   }),
+  mounted() {
+    if (this.$auth.user.role !== 'officer') this.$router.push('/')
+  },
   methods: {
     async invite() {
       await this.$axios.$post('/users/invite', {

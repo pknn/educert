@@ -89,6 +89,7 @@ export default {
     records: []
   }),
   async mounted() {
+    if (this.$auth.user.role !== 'officer') this.$router.push('/')
     this.records = await this.$axios.$get('/records')
   },
   methods: {

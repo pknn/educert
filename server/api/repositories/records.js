@@ -20,13 +20,17 @@ module.exports = {
     `
   },
   getById: async (id) => {
-    const [record] = await sql`
+    try {
+      const [record] = await sql`
       select * from records
-      where holder=${id}
       join users on
       users.public_address=records.holder
-    `
-    return record
+      where holder=${id}
+      `
+      return record
+    } catch (error) {
+      console.log(error)
+    }
   },
   edit: (id, gpax) => {
     return sql`

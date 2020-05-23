@@ -1,14 +1,19 @@
 <template>
-  <div class="py-8 px-32">
-    <div v-if="role === 'officer'"></div>
-    <div v-else-if="role === 'student'"></div>
-    <div v-else></div>
+  <div class="px-32">
+    <div v-if="role === 'employer'"></div>
+    <div v-else-if="role === 'student'">
+      <student />
+    </div>
   </div>
 </template>
 
 <script>
+import Student from '@/components/Student'
 export default {
-  layout: 'withNav',
+  layout: 'withoutNav',
+  components: {
+    Student
+  },
   data() {
     return {
       role: this.$auth.user.role

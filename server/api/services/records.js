@@ -23,7 +23,7 @@ module.exports = {
   getTransactionOf: async (holderID) => {
     const transactions = await txRepo.getAll()
     return transactions.filter(
-      (transaction) => transaction.recordID === holderID
+      (transaction) => transaction.recordId === holderID
     )
   },
   getAllTransactions: () => {
