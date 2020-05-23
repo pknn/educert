@@ -15,12 +15,16 @@ module.exports = {
   getAll: () => {
     return sql`
       select * from records
+      join users on
+      users.public_address=records.holder
     `
   },
   getById: async (id) => {
     const [record] = await sql`
       select * from records
       where holder=${id}
+      join users on
+      users.public_address=records.holder
     `
     return record
   },
