@@ -16,12 +16,14 @@ module.exports = {
     }
   },
   getUsers: async (request, response) => {
-    const { role, entityID } = request.query
+    const { role, entityID, address } = request.query
     let users
     if (entityID) {
       users = await service.getUsersByEntity(entityID)
-    } else {
+    } else if (role) {
       users = await service.getUsersByRole(role)
+    } else if (address) {
+      users = await service.getUserByAddress(address)
     }
     response.json(users)
   },

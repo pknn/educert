@@ -29,6 +29,13 @@
               >Records</nuxt-link
             >
           </li>
+          <li class="text-2xl px-6 py-4">
+            <nuxt-link
+              class="hover:text-blue-800"
+              :to="{ path: '/transactions' }"
+              >Transactions</nuxt-link
+            >
+          </li>
         </ul>
       </div>
       <div class="mx-6">

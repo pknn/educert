@@ -4,7 +4,7 @@ const txRepo = require('../repositories/transaction')
 module.exports = {
   create: async (holderID, gpax, issuerID) => {
     const recordID = await rcRepo.create(holderID, gpax)
-    await txRepo.create(recordID, issuerID, 'create')
+    await txRepo.create(recordID.holder, issuerID, 'create')
   },
   edit: async (recordID, gpax, issuerID) => {
     await rcRepo.edit(recordID, gpax)
