@@ -6,6 +6,7 @@
 1. PostgreSQL
 2. Node.js version 8+
 3. ganache-cli
+4. Metamask Google Chrome Extension
 
 ## Build Setup
 Before start
@@ -15,10 +16,10 @@ Before start
 ```sh
 mv .env.example .env
 source .env
-./migration/migrate.sh
+psql -U $PGUSER -d educert -f ./migration/init.sql
 ```
 4. Import Officer Private Key to your Metamask (Located in `private_keys` directory)
-5. Run `npm install && npm run start`
+5. Run `npm install && npm run build && npm run start`
 
 ## Invite Student
 1. Invite student in page `/users/students`
