@@ -78,9 +78,11 @@ export default {
   async mounted() {
     this.record = await this.$axios.$get('/records/me')
     this.transactions = await this.$axios.$get('/transactions/me')
-    this.sharing = await this.$axios.$get(
-      `/shares?holderId=${this.record.holder}`
-    )
+    if (this.record) {
+      this.sharing = await this.$axios.$get(
+        `/shares?holderId=${this.record.holder}`
+      )
+    }
   },
   methods: {
     async logout() {
